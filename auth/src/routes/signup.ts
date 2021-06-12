@@ -45,8 +45,10 @@ router.post('/api/users/signup',[
          id: user.id,
          email: user.email,
 
-     },'asdf');
-  
+     },process.env.JWT_KEY!
+     );
+   // The ! sign is telling TypeScript that we gaurantee that if the application reaches this point JWT_KEY will be defined. 
+                            // This garantee is taken care of in the index.ts file.
 
  //Store JWT on Sessio Object
  req.session = {
