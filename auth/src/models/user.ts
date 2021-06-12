@@ -33,7 +33,7 @@ const userSchema = new mongoose.Schema({
 });
 
 //When we use the Mongoose 'pre' middleware, the Document can be accessed using the 'this' keyword.
-//If we use a arrow function the 'this' keyword will be overwritten and will now apply to the entire document
+//If we use a arrow function the 'this' keyword will be overwritten and will now apply to the entire JS document
 userSchema.pre('save',async function(done) {
 
     if(this.isModified('password'))
