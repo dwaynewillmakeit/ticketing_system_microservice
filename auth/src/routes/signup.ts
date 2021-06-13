@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken'
 import { User } from '../models/user'
 import { RequestValidationError } from '../errors/requestivalidation-error'
 import { BadRequestError} from '../errors/bad-request-error';
+import { validateRequest } from '../middlewares/validate-request';
 
 const router = express.Router();
 
@@ -17,16 +18,11 @@ router.post('/api/users/signup',[
     .trim()
     .isLength({min: 4, max: 20})
     .withMessage('Password must be between 4 and 20 characters')
-],async ( req: Request,  res: Response)=>{
+],
+validateRequest,
+async ( req: Request,  res: Response)=>{
 
- const errors = validationResult(req);
-
- if(!errors.isEmpty())
- {
-      throw new RequestValidationError(errors.array());
- }
-
- const {email,password} = req.body;
+const {email,password} = req.body;
 
  const exitingUser =  await User.findOne({email});
 
