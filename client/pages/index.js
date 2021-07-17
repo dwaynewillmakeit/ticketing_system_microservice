@@ -4,15 +4,11 @@
  const LandingPage = ({currentUser}) =>{
 
   //The currentUser prop is being retrived from the getInitailProps method
-
-  console.log(currentUser);
-
-
-  return  <h1>Landing Page</h1>
+return currentUser ? <h1>You are logged In</h1>: <h1>You are not logged in</h1>
 }
 
 LandingPage.getInitialProps = async (context) =>{
-  
+
   const client = buildClient (context);
 
   const {data} = await client.get('/api/users/currentuser');
